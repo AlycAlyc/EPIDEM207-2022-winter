@@ -93,7 +93,7 @@ DATA desk.Kim_table_1; set Kim;
 RUN;
 
 /************************************************************************/
-/*CODE FROM "Epi207_Assignment1PartA.sas". Code is modified from:       */
+/*CODE FROM "Epi207_Assignment1PartB.sas". Code is modified from:       */
 /* “Creating a data dictionary using Base SAS®” by Tasha Chapman        */
 /************************************************************************/
 
@@ -170,8 +170,22 @@ PROC PRINT data=datadictionaryA noobs label; RUN;
 ods tagsets.excelxp close;
 
 /* Code set for creating the codebook. */
-ods tagsets.excelxp file="\\Client\H$\Desktop\UCLA\2022\2022 Winter\207\Week 2\Homework\Epi207_Assignment1_Codebook.xls" style=statistical;
-PROC CONTENTS data = Kim_table_1;
-PROC MEANS data = Kim_table_1;
+/* This part uses the "TK_codebook.sas" macro, which is available for download at */
+/* https://blogs.sas.com/content/sgf/2021/02/01/creating-codebooks-with-sas-macros/ */ 
+title  height = 12 pt 'Master Codebook for EPI207 Assignment 1, Part B';
+title2 height = 10pt 'Original data provided by Kim et al.';
+title3 height = 10pt 'Codebook created with the %TK_Codebook macro.';
+
+%let WorkFolder = \\Client\H$\Desktop\UCLA\2022\2022 Winter\207\Week 2\Homework\74013_example\TKFolder;
+%let OutFolder = \\Client\H$\Desktop\UCLA\2022\2022 Winter\207\Week 2\Homework;
+%include "&WorkFolder./TK_codebook.sas";
+
+%TK_codebook(lib=work,
+			 file1=Kim_table_1,
+			 fmtlib=desk,
+			 cb_type=xlsx,
+			 cb_file=&OutFolder./EPI207_Assignment1_Codebook.xlsx,
+			 var_order=,
+			 organization =,
+			 include_warn=YES);
 RUN;
-ods tagsets.excelxp close;
