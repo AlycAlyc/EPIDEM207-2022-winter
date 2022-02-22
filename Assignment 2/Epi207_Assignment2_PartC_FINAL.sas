@@ -136,20 +136,6 @@ MODEL HT (EVENT='Yes') = ASM_Wt_ Sex Age shx_smoke_yn shx_alcohol_yn;
 RUN;
 TITLE;
 
-PROC LOGISTIC DATA=outdata_label;
-TITLE "HTN: Model 3";
-MODEL HT (EVENT='Yes') = ASM_Wt_ Sex Age shx_smoke_yn shx_alcohol_yn bexam_bmi bexam_wc; 
-RUN;
-TITLE;
-
-PROC LOGISTIC DATA=outdata_label;
-TITLE "HTN: Model 4";
-MODEL HT (EVENT='Yes') = ASM_Wt_ Sex Age shx_smoke_yn shx_alcohol_yn bexam_bmi bexam_wc DysL_ dm; 
-ods output ParameterEstimates=OutEst
-OddsRatios=OutOR;
-RUN;
-TITLE;
-
 /* Linear regressions (ASM% and MAP) */
 PROC REG DATA=outdata_label
   plots =(DiagnosticsPanel ResidualPlot(smooth));
