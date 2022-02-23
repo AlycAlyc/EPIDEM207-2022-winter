@@ -1,5 +1,5 @@
 # EPIDEM207-2022-winter
-A demo repo for the EPI 254 class.
+A demo repo for the EPI 207 class.
 
 *This file serves as a template for a README.md for a project.*
 
